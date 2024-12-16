@@ -9,12 +9,13 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def start(message):
-    print('Привет! Я бот помогающий твоему здоровью.')
+    user_name = message["from"]['first_name']
+    print(f'Привет, {user_name}! Я бот помогающий твоему здоровью.')
 
 @dp.message_handler()
 async def all_messages(message):
-    print('Введите команду /start, чтобы начать общение.')
-    print(message["from"]['first_name'])
+    user_name = message["from"]['first_name']
+    print(user_name + ',', 'Введите команду /start, чтобы начать общение.')
 
 
 if __name__ == '__main__':
