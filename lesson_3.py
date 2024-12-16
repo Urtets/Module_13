@@ -1,30 +1,28 @@
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters.command import Command
+from aiogram import Bot, Dispatcher, types, executor
 import asyncio
-import logging
 from api_token import api_token
-
-
-
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 api = api_token
 bot = Bot(token=api)
-dp = Dispatcher()
+dp = Dispatcher(bot)
 
 
-async def main():
-    await dp.start_polling(bot)
-
-
-@dp.message()
-async def all_mrssage(message):
-    print("Мы получили сообщение")
-    print(message)
-
-@dp.message()
-async def message(message):
+@dp.message_handler(text=['Urban', 'ff'])
+async def urban_message(message):
     print("Urban message")
 
 
+@dp.message_handler(commands=['start'])
+async def start_message(message):
+    print("Start message")
+
+
+@dp.message_handler()
+async def all_message(message):
+    print("Мы получили сообщение")
+    print(message)
+
+
 if __name__ == '__main__':
-    asyncio.run(main())
+    executor.start_polling(dp, skip_updates=True)
