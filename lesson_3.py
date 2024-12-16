@@ -2,12 +2,12 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 import asyncio
 import logging
+from api_token import api_token
 
 
 
 
-
-api = "7296819356:AAF2e9KDBv_6sfVLWeBdLKmZeVGcpXJKUN8"
+api = api_token
 bot = Bot(token=api)
 dp = Dispatcher()
 
