@@ -3,7 +3,12 @@ import asyncio
 
 
 async def start_strongman(name, power):
+    """
 
+    :param name: - имя силача
+    :param power: - его сила
+    :return:
+    """
     print(f"Силач {name} начал соревнования.")
     for i in range(1, 6):
         person_power = power
