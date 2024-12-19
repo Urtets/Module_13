@@ -22,8 +22,7 @@ async def start_command(message):
                          'введи слово "Calories" и следуй инструкции')
 
 
-
-@dp.message_handler(text='Calories')
+@dp.message_handler(text=['Calories', 'calories'])
 async def set_age(message):
     await message.answer("Введите свой возраст")
     await UserState.age.set()
@@ -54,6 +53,13 @@ async def send_calories(message, state):
     result = (10 * weight) + (6.25 * growth) - (5 * age) + 5
     await message.answer(f"Ваша норма калорий: {result} в день")
     await state.finish()
+
+
+@dp.message_handler()
+async def any_text(message):
+    await message.answer(f'Добрый день, {message["from"]["first_name"]}!')
+    await message.answer(f'Чтобы начать пользоваться услугами бота, пожалуйста, '
+                         f'введите слово "/start"')
 
 
 if __name__ == '__main__':
