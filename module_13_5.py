@@ -28,6 +28,7 @@ async def start(message):
                          f'Выбери одну из кнопок: ', reply_markup=kb)
 
 
+
 @dp.message_handler(text='Информация')
 async def inform(message):
     await message.answer('Информация о боте')
