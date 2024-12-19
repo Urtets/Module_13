@@ -1,17 +1,27 @@
-from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, executor
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher.filters.state import State, StatesGroup
+
 from api_token import api_token
-import asyncio
 
 api = api_token
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
+
 class UserState(StatesGroup):
     age = State()
     growth = State()
     weight = State()
+
+
+@dp.message_handler(commands=['start'])
+async def start_command(message):
+    await message.answer('Привет! Я бот помогающий твоему здоровью')
+    await message.answer('Чтобы я помог тебе рассчитать суточную норму калорий,'
+                         'введи слово "Calories" и следуй инструкции')
+
+
 
 @dp.message_handler(text='Calories')
 async def set_age(message):
